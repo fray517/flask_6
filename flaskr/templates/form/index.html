@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h2 class="card-title mb-0">Анкета пользователя</h2>
+    </div>
+    <div class="card-body">
+        {% if submitted %}
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Данные успешно отправлены!</h4>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-2"><strong>Имя:</strong> {{ name }}</p>
+                    <p class="mb-2"><strong>Город:</strong> {{ city }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-2"><strong>Хобби:</strong> {{ hobby }}</p>
+                    <p class="mb-2"><strong>Возраст:</strong> {{ age }}</p>
+                </div>
+            </div>
+            <hr>
+            <a href="{{ url_for('form.index') }}" class="btn btn-primary">Заполнить снова</a>
+        </div>
+        {% else %}
+        <form method="POST" action="{{ url_for('form.index') }}">
+            <div class="mb-3">
+                <label for="name" class="form-label">Имя</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">Город</label>
+                <input type="text" class="form-control" id="city" name="city" required>
+            </div>
+            <div class="mb-3">
+                <label for="hobby" class="form-label">Хобби</label>
+                <input type="text" class="form-control" id="hobby" name="hobby" required>
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Возраст</label>
+                <input type="number" class="form-control" id="age" name="age" min="1" max="150" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
